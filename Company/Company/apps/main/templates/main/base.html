@@ -1,0 +1,82 @@
+{% load static %}
+<html>
+	<head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  
+		<meta charset="UTF-8">
+		
+		<title> {% block title %}{{ title }}{% endblock %}</title>
+		<link rel="stylesheet" href="{% static 'main/css/bootstrap.css' %}">
+
+	</head>
+	
+	
+
+	<body>
+
+        
+        
+					{%if user.is_authenticated %}
+        
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'profile' user.pk %}">Сайт Промо-компаний</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">На главную</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'profile' user.pk %}">Мой профиль</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create_company' %}">Добавить компанию</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Выйти из профиля</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+        <center>
+            <br>
+            <header> {% block header %}<div align="center"> <h1>{{ title }}</h1></div>{% endblock %}</header>
+						<p>Приветствую {{ user.username }}!</p>
+        
+<hr>
+							
+					{% else %}
+            
+           <center> <br>
+            <h1> Добро пожаловать на сайт<br>
+            Промо-компаний</h1>
+            
+						<p>Здравствуй гость</p>
+          		 		<p><a href="{% url 'login' %}">
+          		 		<button type="button" class="btn btn-success">Войти</button></a></p>
+
+						<p><a href="{% url 'signup' %}">
+          		 		<button type="button" class="btn btn-success">Зарегистрироваться</button></a></p></center>
+          				
+          				<br>
+            <hr>
+            <br>
+            
+					{% endif %}
+				
+
+		{% block content %}
+
+		{% endblock %}
+
+		{% block profile %}
+
+		{% endblock %}
+        </center>
+	</body>
+	
+</html>
